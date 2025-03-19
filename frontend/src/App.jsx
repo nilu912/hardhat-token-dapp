@@ -1,32 +1,42 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { ethers } from "ethers";
 import TokenBalance from "./components/TokenBalance";
 import TransferToken from "./components/TransferToken";
 import WalletConnect from "./components/WalletConnect";
 
-
 const App = () => {
-  const [account,setAccount] = useState(null);
-  const [contract,setContract] = useState(null);
+  const [account, setAccount] = useState(null);
+  const [contract, setContract] = useState(null);
 
   return (
-    <div>
-      <h2>Blockchain Token DApp</h2>
-      <WalletConnect setAccount={setAccount} setContract={setContract} />
-      {account && (
-        <>
-          <TokenBalance account={account} />
-          <TransferToken account={account} updateBalance={()=>setAccount(account)} />
-        </>
-      )}
+    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-4">
+      <h2 className="text-3xl font-bold mb-8 text-center text-blue-400">
+        Blockchain Token DApp
+      </h2>
+
+      <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md space-y-6">
+        <WalletConnect setAccount={setAccount} setContract={setContract} />
+
+        {account && (
+          <div className="space-y-6">
+            <div className="bg-gray-700 p-4 rounded-lg shadow-sm">
+              <TokenBalance account={account} />
+            </div>
+
+            <div className="bg-gray-700 p-4 rounded-lg shadow-sm">
+              <TransferToken
+                account={account}
+                updateBalance={() => setAccount(account)}
+              />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
-
-
-
+export default App;
 
 // import React from "react";
 // import { useState, useEffect } from "react";
